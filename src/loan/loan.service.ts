@@ -6,6 +6,7 @@ import { Loan } from './entities/loan.entity'
 import { UserService } from 'src/user/user.service'
 import { InjectRepository } from '@nestjs/typeorm'
 import { LoanDto } from './dto/loan.dto'
+
 // import { CreateLoanDto } from './dto/create-loan.dto';
 // import { UpdateLoanDto } from './dto/update-loan.dto';
 
@@ -52,13 +53,26 @@ export class LoanService {
   // }
 
   async findLoan(id: number, loan:LoanDto): Promise<Loan[]> {
-    return await this.loanRepository.find({where:{book:loan.bookId, user:loan.userId,returnDate:null},
-                                           relations:['book']})
+    console.log(loan)
+    // const book = new Book()
+    // const user = new User()
+    // book.id = loan.bookId
+    // user.id = loan.userId
+    
+    return await this.loanRepository.find({
+      where:{
+        book:{id:1}, 
+        // user:{id: 1},
+        returnDate:null
+      },
+      relations:['book']
+      })
   }
 
   async update(id, loanDto): Promise<Loan> {
     try {
     const loan = await this.findLoan(id,loanDto)[0]
+      console.log(loan)
     if(loan === undefined) throw new Error('No borrowed books')
     const book = await this.bookService.findBook(loan.book.id)
     // const user = await this.userService.findOne(loanDto.userId)

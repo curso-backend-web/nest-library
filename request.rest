@@ -34,8 +34,14 @@ Content-Type: application/json
 
 {
     "bookId":1,
-    "userId":2
+    "userId":1
 }
 
 ##########
 PATCH http://localhost:3000/api/v1/loan/1
+Content-Type: application/json
+
+{
+    "bookId":1,
+    "userId":1
+}
