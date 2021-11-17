@@ -1,31 +1,9 @@
 import { Injectable } from '@nestjs/common'
 // import { Book } from './interface/book.class'
-import { Book } from './entity/book.entity'
-import { BookDto } from './dto/book.dto'
+import { Book } from './entities/book.entity'
+import { createBookDto } from './dto/book.dto'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
-
-const books:Array<Book> = [
-  {
-    id: 1,
-    title: "El enigma de la habitación 622",
-    genre: "Ficción contemporánea",
-    description: "Vuelve el «principito de la literatura negra contemporánea, el niño mimado de la industria literaria» (GQ): el nuevo thriller de Joël Dicker es su novela más personal. ",
-    author: "Joël Dicker",
-    publisher: "Alfaguara",
-    pages: 624,
-    image_url: "https://images-na.ssl-images-amazon.com/images/I/41KiZbwOhhL._SX315_BO1,204,203,200_.jpg"
-  },
-  {
-    id: 2,
-    title: "El enigma de la habitación 622",
-    genre: "Ficción contemporánea",
-    description: "Vuelve el «principito de la literatura negra contemporánea, el niño mimado de la industria literaria» (GQ): el nuevo thriller de Joël Dicker es su novela más personal. ",
-    author: "Joël Dicker",
-    publisher: "Alfaguara",
-    pages: 624,
-    image_url: "https://images-na.ssl-images-amazon.com/images/I/41KiZbwOhhL._SX315_BO1,204,203,200_.jpg"
-  },]
 
 @Injectable()
 export class BookService {
@@ -33,11 +11,13 @@ export class BookService {
     @InjectRepository(Book) private bookRepository: Repository<Book>
   ){}
 
-  async findAll(params): Promise<Book[]> {
-    return await this.bookRepository.find()
+  async findAll({order=1,limit=0}={}): Promise<Book[]> {
+    const sort = order?'ASC':'DESC'
+    
+    return await this.bookRepository.find({order:{title:sort},take:limit})
   }
 
-  async createBook(newBook: BookDto): Promise<Book>{
+  async createBook(newBook: createBookDto): Promise<Book>{
     const book: Book = new Book()
     // Object.assign(book,newBook)
    
@@ -48,14 +28,14 @@ export class BookService {
     book.description = newBook.description
     book.publisher = newBook.publisher
     book.image_url = newBook.image_url
-
+    book.available = true
     return await this.bookRepository.save(book)
   }
 
-  // findBook(bookId:string){
-  //   //  return `findBook funciona con bookId:${bookId}`;
-  //   return books.find(element => element.id === +bookId)
-  // }
+  async findBook(bookId): Promise<Book>{
+    //  return `findBook funciona con bookId:${bookId}`;
+    return await this.bookRepository.findOne(bookId)
+  }
   // createBook(newBook: BookDto): Book{
   //   const book = new Book()
   //   book.id = 99

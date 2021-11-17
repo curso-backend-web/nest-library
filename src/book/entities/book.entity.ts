@@ -27,4 +27,7 @@ export class Book{
     @Column()
     image_url: string
 
+    @Column({default:true})
+    available: boolean
+
 }

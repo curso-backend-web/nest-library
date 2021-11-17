@@ -10,9 +10,9 @@ import {
   Req,
 } from '@nestjs/common'
 import { Request } from 'express'
-import { BookDto } from './dto/book.dto'
+import { createBookDto } from './dto/book.dto'
 import { BookService } from './book.service'
-import { Book } from './entity/book.entity'
+import { Book } from './entities/book.entity'
 @Controller('book')
 export class BookController {
   constructor(private readonly bookService: BookService) {}
@@ -38,7 +38,7 @@ export class BookController {
   // }
 
   @Post()
-  async createBook(@Body() newBook: BookDto): Promise<Book> {
+  async createBook(@Body() newBook: createBookDto): Promise<Book> {
     // const newBook: any = body;
     return this.bookService.createBook(newBook)
   }
