@@ -33,6 +33,9 @@ POST http://localhost:3000/api/v1/loan
 Content-Type: application/json
 
 {
-    "bookId":2,
-    "userId":1
+    "bookId":1,
+    "userId":2
 }
+
+##########
+PATCH http://localhost:3000/api/v1/loan/1
