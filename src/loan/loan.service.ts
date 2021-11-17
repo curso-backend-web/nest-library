@@ -1,10 +1,11 @@
-import { Injectable } from '@nestjs/common'
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common'
 import { BookService } from '../book/book.service'
 import { getConnection, Repository } from 'typeorm'
 
 import { Loan } from './entities/loan.entity'
 import { UserService } from 'src/user/user.service'
 import { InjectRepository } from '@nestjs/typeorm'
+import { LoanDto } from './dto/loan.dto'
 // import { CreateLoanDto } from './dto/create-loan.dto';
 // import { UpdateLoanDto } from './dto/update-loan.dto';
 
@@ -39,7 +40,7 @@ export class LoanService {
 
       return newLoan
     } catch (error) {
-      throw error
+      throw new HttpException(error.message, HttpStatus.FORBIDDEN)
     }
 
 
@@ -50,18 +51,19 @@ export class LoanService {
   //   return `This action returns all loan`;
   // }
 
-  async findOne(id: number):Promise<Loan> {
-    return await this.loanRepository.findOne(id, {relations:['book']})
+  async findLoan(id: number, loan:LoanDto): Promise<Loan[]> {
+    return await this.loanRepository.find({where:{book:loan.bookId, user:loan.userId,returnDate:null},
+                                           relations:['book']})
   }
 
-  async update(id): Promise<Loan> {
-    const loan = await this.findOne(id)
-    console.log(loan)
+  async update(id, loanDto): Promise<Loan> {
+    try {
+    const loan = await this.findLoan(id,loanDto)[0]
+    if(loan === undefined) throw new Error('No borrowed books')
     const book = await this.bookService.findBook(loan.book.id)
     // const user = await this.userService.findOne(loanDto.userId)
     let newLoan: Loan
 
-    try {
 
       if (book.available)
         return
@@ -79,7 +81,7 @@ export class LoanService {
 
       return newLoan
     } catch (error) {
-      throw error
+      throw new HttpException(error.message, HttpStatus.FORBIDDEN)
     }
 
   }

@@ -1,29 +1,22 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, HttpException, HttpCode, HttpStatus, Put } from '@nestjs/common'
+import { Controller, Get, Post, Body, Patch, Param, Delete, HttpException, HttpCode, HttpStatus, Put, UseFilters } from '@nestjs/common'
 import { LoanService } from './loan.service'
-import { CreateLoanDto } from './dto/create-loan.dto'
+import { LoanDto } from './dto/loan.dto'
+import { HttpExceptionFilter } from '../helper/http-exception.filter'
 
 // import { UpdateLoanDto } from './dto/update-loan.dto'
-
+@UseFilters(new HttpExceptionFilter())
 @Controller('loan')
 export class LoanController {
   constructor(private readonly loanService: LoanService) {}
 
   @Post()
-  async create(@Body() createLoanDto: CreateLoanDto) {
-    try {
-      return await this.loanService.create(createLoanDto)
-      
-    } catch (error) {
-      throw new HttpException({
-        status: HttpStatus.FORBIDDEN,
-        error: error.message
-      }, HttpStatus.FORBIDDEN)
-    }
+  async create(@Body() loanDto: LoanDto) {
+      return await this.loanService.create(LoanDto)
   }
 
   @Patch(':loanId')
-  async update(@Param('loanId') loanId: number){
-    return await this.loanService.update(loanId)
+  async update(@Param('loanId') loanId: number, @Body() loanDto: LoanDto){
+    return await this.loanService.update(loanId,loanDto)
   }
 
 }
