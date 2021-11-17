@@ -1,19 +1,19 @@
-import { Book } from "src/book/entities/book.entity"
-import { User } from "src/user/entities/user.entity"
-import { Column, CreateDateColumn, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm"
+import { Book } from "../../book/entities/book.entity"
+import { User } from "../../user/entities/user.entity"
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm"
 
 @Entity()
 export class Loan {
     @PrimaryGeneratedColumn()
     id: number
 
-    @OneToOne(type => Book, book => book.id)
+    @ManyToOne(() => Book, book => book.id)
     @JoinColumn()
-    bookId: number
+    book: Book
 
-    @OneToOne(type => User, user => user.id)
+    @ManyToOne(() => User, user => user.id)
     @JoinColumn()
-    userId:number
+    user:User
 
     @CreateDateColumn({type: 'datetime'})
     loanDate: Date

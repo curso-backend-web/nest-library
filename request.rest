@@ -33,6 +33,6 @@ POST http://localhost:3000/api/v1/loan
 Content-Type: application/json
 
 {
-    "bookId":1,
+    "bookId":2,
     "userId":1
 }
