@@ -54,15 +54,10 @@ export class LoanService {
 
   async findLoan(id: number, loan:LoanDto): Promise<Loan[]> {
     console.log(loan)
-    // const book = new Book()
-    // const user = new User()
-    // book.id = loan.bookId
-    // user.id = loan.userId
-    
     return await this.loanRepository.find({
       where:{
-        book:{id:1}, 
-        // user:{id: 1},
+        book:loan.bookId, 
+        user:loan.userId,
         returnDate:null
       },
       relations:['book']
@@ -71,11 +66,11 @@ export class LoanService {
 
   async update(id, loanDto): Promise<Loan> {
     try {
-    const loan = await this.findLoan(id,loanDto)[0]
-      console.log(loan)
+    const [loan] = await this.findLoan(id,loanDto)
+      
     if(loan === undefined) throw new Error('No borrowed books')
     const book = await this.bookService.findBook(loan.book.id)
-    // const user = await this.userService.findOne(loanDto.userId)
+    
     let newLoan: Loan
 
 

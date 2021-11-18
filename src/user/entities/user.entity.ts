@@ -1,4 +1,5 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm"
+import { Encryptation } from "../../common/utils/encryptation.helper"
+import { BeforeInsert, Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm"
 
 @Entity()
 export class User {
@@ -6,13 +7,18 @@ export class User {
     @PrimaryGeneratedColumn()
     id: number
 
-    @Column()
+    @Column({unique:true})
     email: string
 
     @Column()
     password: string
 
-    @Column()
+    @Column({nullable:true})
     photo: string
+
+    @BeforeInsert()
+    async hashPassword() {
+        this.password = await Encryptation.encryptPassword(this.password)
+    }
 
 }

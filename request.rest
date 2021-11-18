@@ -45,3 +45,13 @@ Content-Type: application/json
     "bookId":1,
     "userId":1
 }
+
+###############
+POST  http://localhost:3000/api/v1/user/register
+Content-Type: application/json
+
+{
+    "email":"a@a.aa",
+    "password":"1234",
+    "photo":"http://photo.png"
+}
