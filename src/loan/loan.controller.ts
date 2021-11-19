@@ -17,11 +17,13 @@ import { LoanService } from './loan.service'
 import { LoanDto } from './dto/loan.dto'
 import { HttpExceptionFilter } from '../common/exceptions/http-exception.filter'
 import { AuthGuard } from '@nestjs/passport'
+import { ApiBearerAuth } from '@nestjs/swagger'
 
 // import { UpdateLoanDto } from './dto/update-loan.dto'
 
 @UseFilters(new HttpExceptionFilter())
 @UseGuards(AuthGuard('jwt'))
+@ApiBearerAuth('access-token')
 @Controller('loan')
 export class LoanController {
   constructor(private readonly loanService: LoanService) {}
