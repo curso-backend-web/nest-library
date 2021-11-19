@@ -7,8 +7,8 @@ import { TypeOrmModule } from '@nestjs/typeorm'
 import { Loan } from './entities/loan.entity'
 
 @Module({
-  imports:[BookModule, UserModule, TypeOrmModule.forFeature([Loan])],
+  imports: [BookModule, UserModule, TypeOrmModule.forFeature([Loan])],
   controllers: [LoanController],
-  providers: [LoanService]
+  providers: [LoanService],
 })
 export class LoanModule {}

@@ -1,4 +1,4 @@
 export class LoanDto {
-    readonly bookId: number
-    readonly userId: number
+  readonly bookId: number
+  readonly userId: number
 }
