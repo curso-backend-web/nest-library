@@ -13,11 +13,15 @@ import configuration from './config/config'
       isGlobal: true,
       load: [configuration],
     }),
-    TypeOrmModule.forRootAsync({
-      inject: [ConfigService],
-      useFactory: async (configService: ConfigService) => ({
-        ...configService.get('database'),
-      }),
+    TypeOrmModule.forRoot({
+      type: 'mysql',
+      host: process.env.DB_HOST,
+      port: parseInt(process.env.DB_PORT),
+      username: process.env.DB_USER,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DATABASE,
+      entities: ['dist/**/*.entity.js'],
+      synchronize: false,
     }),
     BookModule,
     UserModule,
