@@ -11,8 +11,8 @@ export class createBookDto {
   readonly author: string
   @ApiProperty({ example: 'Narrativa Sexto Piso' })
   readonly publisher: string
-  @ApiProperty({ example: '348 pags' })
-  readonly pages: string
+  @ApiProperty({ example: 348 })
+  readonly pages: number
   @ApiProperty({
     example: 'https://imagessl3.casadellibro.com/a/l/t5/93/9788417517793.jpg',
   })

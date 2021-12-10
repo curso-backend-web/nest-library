@@ -67,3 +67,19 @@ Content-Type: application/json
     "email":"otro@mail.com",
     "password":"1234"
 }
+
+
+#########
+
+POST https://library-rgl.herokuapp.com/api/v1/book
+Content-Type: application/json
+
+{
+  "title": "exhalation",
+  "genre": "novela",
+  "description": "novela de ciencia ficción ...",
+  "author": "Chiang, Ted",
+  "publisher": "Narrativa Sexto Piso",
+  "pages": 348,
+  "image_url": "https://imagessl3.casadellibro.com/a/l/t5/93/9788417517793.jpg"
+}
