@@ -30,16 +30,17 @@ Content-Type: application/json
 
 ##########
 POST http://localhost:3000/api/v1/loan
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im51ZXZvQG1haWwuY29tIiwiaWF0IjoxNjM3MzI0NjYxLCJleHAiOjE2Mzc0MTEwNjF9.7FPfjLz56q_ehPV26w0rhMi0jz9kv_iEgxMN96KTlP0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im90cm9AbWFpbC5jb20iLCJpYXQiOjE2MzkxMzUzNDgsImV4cCI6MTYzOTIyMTc0OH0.sEZidJI_MbQhBCM2LVyCOHA-lMIclcMyvNd8zyC2x08
 Content-Type: application/json
 
 {
-    "bookId":1,
-    "userId":1
+    "bookId":3,
+    "userId":2
 }
 
 ##########
 PATCH http://localhost:3000/api/v1/loan/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQG1haWwuY29tIiwiaWF0IjoxNjM5MTM1MjQzLCJleHAiOjE2MzkyMjE2NDN9.mPLpojpTfWkuOZ7b1N0hWEyGEfSk5pfd-3TGUkspwfs
 Content-Type: application/json
 
 {
@@ -52,9 +53,10 @@ POST  http://localhost:3000/api/v1/user/register
 Content-Type: application/json
 
 {
-    "email":"nuevo@mail.com",
+    "email":"admin@mail.com",
     "password":"1234",
-    "photo":"http://photo.png"
+    "photo":"http://photo.png",
+    "role":"admin"
 }
 ##########
 
@@ -62,6 +64,6 @@ POST http://localhost:3000/api/v1/auth/login
 Content-Type: application/json
 
 {
-    "email":"nuevo@mail.com",
+    "email":"otro@mail.com",
     "password":"1234"
 }

@@ -1,11 +1,5 @@
 import { Encryptation } from '../../common/utils/encryptation.helper'
-import {
-  BeforeInsert,
-  Column,
-  Entity,
-  OneToMany,
-  PrimaryGeneratedColumn,
-} from 'typeorm'
+import { BeforeInsert, Column, Entity, PrimaryGeneratedColumn } from 'typeorm'
 
 @Entity()
 export class User {
@@ -20,6 +14,9 @@ export class User {
 
   @Column({ nullable: true })
   photo: string
+
+  @Column({ nullable: true })
+  role: string
 
   @BeforeInsert()
   async hashPassword() {

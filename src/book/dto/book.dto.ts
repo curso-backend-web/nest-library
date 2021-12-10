@@ -1,19 +1,21 @@
-import { ApiProperty } from "@nestjs/swagger"
+import { ApiProperty } from '@nestjs/swagger'
 
 export class createBookDto {
-  @ApiProperty({example: 'exhalation'})
+  @ApiProperty({ example: 'exhalation' })
   readonly title: string
-  @ApiProperty({example: 'novela'})
+  @ApiProperty({ example: 'novela' })
   readonly genre: string
-  @ApiProperty({example: 'novela de ciencia ficción ...'})
+  @ApiProperty({ example: 'novela de ciencia ficción ...' })
   readonly description: string
-  @ApiProperty({example: 'Chiang, Ted'})
+  @ApiProperty({ example: 'Chiang, Ted' })
   readonly author: string
-  @ApiProperty({example:'Narrativa Sexto Piso'})
+  @ApiProperty({ example: 'Narrativa Sexto Piso' })
   readonly publisher: string
-  @ApiProperty({example: '348 pags'})
+  @ApiProperty({ example: '348 pags' })
   readonly pages: string
-  @ApiProperty({example:'https://imagessl3.casadellibro.com/a/l/t5/93/9788417517793.jpg'})
+  @ApiProperty({
+    example: 'https://imagessl3.casadellibro.com/a/l/t5/93/9788417517793.jpg',
+  })
   readonly image_url: string
 }
 

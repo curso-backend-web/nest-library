@@ -5,7 +5,7 @@ export default registerAs('db', () => {
   const connectionOption: MysqlConnectionOptions = {
     type: 'mysql',
     entities: ['dist/**/*.entity.js'],
-    synchronize: false,
+    synchronize: true,
   }
 
   if (process.env.CLEARDB_DATABASE_URL) {

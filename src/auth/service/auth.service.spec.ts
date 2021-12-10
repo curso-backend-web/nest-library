@@ -1,7 +1,7 @@
 import { JwtService } from '@nestjs/jwt'
 // import { PassportModule } from '@nestjs/passport'
 import { Test, TestingModule } from '@nestjs/testing'
-import { UserService } from '../user/user.service'
+import { UserService } from '../../user/user.service'
 import { AuthService } from './auth.service'
 
 jest.mock('../user/user.service')
