@@ -18,13 +18,15 @@ import { LoanDto } from './dto/loan.dto'
 import { HttpExceptionFilter } from '../common/exceptions/http-exception.filter'
 import { AuthGuard } from '@nestjs/passport'
 import { ApiBearerAuth } from '@nestjs/swagger'
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard'
 
 // import { UpdateLoanDto } from './dto/update-loan.dto'
 
 @UseFilters(new HttpExceptionFilter())
-@UseGuards(AuthGuard('jwt'))
+@UseGuards(JwtAuthGuard, RolesGuard)
 @ApiBearerAuth('access-token')
 @Controller('loan')
+@Roles('Admin')
 export class LoanController {
   constructor(private readonly loanService: LoanService) {}
   @Post()
