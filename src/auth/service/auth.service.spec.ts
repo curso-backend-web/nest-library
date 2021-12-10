@@ -4,7 +4,7 @@ import { Test, TestingModule } from '@nestjs/testing'
 import { UserService } from '../../user/user.service'
 import { AuthService } from './auth.service'
 
-jest.mock('../user/user.service')
+jest.mock('../../user/user.service')
 jest.mock('@nestjs/jwt')
 describe('AuthService', () => {
   let service: AuthService
